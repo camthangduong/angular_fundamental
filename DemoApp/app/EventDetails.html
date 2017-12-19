@@ -18,12 +18,12 @@
                 <img ng-src="{{event.imageUrl}}" alt="{{event.name}}" />
                 <div class="row">
                     <div class="span11">
-                        <h2>{{event.name}}</h2>
+                        <h2>{{event.name | uppercase}}</h2>
                     </div>
                 </div>
                 <div class="row">
                     <div class="span3">
-                        <div><strong>Date:</strong>{{event.date}}</div>
+                        <div><strong>Date:</strong>{{event.date | date:'mediumDate'}}</div>
                         <div><strong>Time:</strong>{{event.time}}</div>
                     </div>
                     <div class"span4">
@@ -33,12 +33,23 @@
                             {{event.location.city}}, {{event.location.province}}
                         </address>
                     </div>
-                </div>
-
+                </div>                
                 <hr />
                 <h3>Sessions</h3>
+                Order By:
+                <select ng-model="sortorder" class="input-small">
+                    <option selected value="name">Name</option>
+                    <option value="-upVoteCount">Votes</option>                    
+                </select>
+                Show:
+                <select ng-model='query.level' class="input-medium">
+                    <option selected value="">All</option>
+                    <option value="introduction">Introduction</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
                 <ul class="thumbnails">
-                    <li ng-repeat="session in event.sessions">                        
+                    <li ng-repeat="session in event.sessions | orderBy: sortorder | filter : query">                        
                         <div class="row session">
                             <div class="span0 well votingWidget">
                                 <div class="votingButton" ng-click="upVoteSession(session)">

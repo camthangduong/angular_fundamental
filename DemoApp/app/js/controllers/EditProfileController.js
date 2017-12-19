@@ -1,9 +1,11 @@
 'use strict';
 
 eventsApp.controller('EventController', function ($scope) {
+    $scope.sortorder = 'name';
+    $scope.query = '';
     $scope.event = {
         name : 'Angular Boot Camp',
-        date : '1/1/2018',
+        date : 1359781015626,
         time : '10:30 AM',
         location : {
             address : 'CaseWare International Inc.',
