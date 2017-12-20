@@ -10,7 +10,9 @@
         <div class="container">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <ul class="nav"></ul>
+                    <ul class="nav">
+                        <li><a href="/NewEvent.html">Creata Event</a></li>
+                    </ul>
                 </div>
             </div>
 
@@ -65,7 +67,7 @@
                             <div class="well span9">
                                 <h4 class="well-title">{{session.name}}</h4>
                                 <h6 style="margin-top: 10px">{{session.creator}}</h6>
-                                <span>Duration: {{session.duration}}</span>
+                                <span>Duration: {{session.duration | durations}}</span>
                                 <span>Level: {{session.level}}</span>
 
                                 <p>{{session.abstract}}</p>
