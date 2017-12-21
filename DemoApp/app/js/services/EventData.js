@@ -1,8 +1,10 @@
 'use strict';
 // Create a service
-eventsApp.factory('eventData', function () {
+eventsApp.factory('eventData', function ($resource) {
+    var resource = $resource('/data/event/:id', {id:'@id'});
+
     return {
-        event : {
+        /*event : {
             name : 'Angular Boot Camp',
             date : "12/19/2017",
             time : '10:30 AM',
@@ -38,6 +40,23 @@ eventsApp.factory('eventData', function () {
                     upVoteCount : 0
                 }
             ]
+        }*/
+        /* getEvent : function () {
+            // Promises
+            return $http({method : 'GET', url: '/data/event/1'})                
+        }*/
+        // Assume we use Rest-base architecture
+        getEvent : function () {
+            /**
+             * URL
+             * ID to be replaced
+             * GET method
+             */
+            return resource.get({id:1});
+        },
+        save : function (event) {
+            event.id = 999;
+            return resource.save(event);
         }
     };
 });

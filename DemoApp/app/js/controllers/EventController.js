@@ -1,9 +1,21 @@
 'use strict';
 
-eventsApp.controller('EventController', function ($scope, eventData) {
+eventsApp.controller('EventController', function ($scope, eventData, $log) {
     $scope.sortorder = 'name';
     $scope.query = '';
-    $scope.event = eventData.event
+    /* eventData.getEvent()
+        .success(function (event) { $scope.event = event;})
+        .error(function (data, status, headers, config) {
+            $log.warn(data, status, headers(), config)
+        })*/
+
+    /**
+     * Use $resource in EventData     
+     */    
+    eventData.getEvent()
+        .$promise
+        .then (function (event) {$scope.event = event; console.log(event);})
+        .catch(function (response) { console.log(response); });
 
     $scope.upVoteSession = function (i_oSession) {
         i_oSession.upVoteCount++;
