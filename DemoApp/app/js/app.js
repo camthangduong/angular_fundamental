@@ -1,7 +1,7 @@
 'use strict';
 
 var eventsApp = angular.module('eventsApp', ['ngResource', 'ngRoute'])
-    .config(function ($routeProvider) {
+    .config(function ($routeProvider, $locationProvider) {
         // Config route
         $routeProvider.when('/newEvent', {
             templateUrl : 'templates/NewEvent.html',
@@ -17,5 +17,8 @@ var eventsApp = angular.module('eventsApp', ['ngResource', 'ngRoute'])
             controller : 'EventController'
         });
         // Set default page
-        $routeProvider.otherwise({redirectTo: '/events'})
+        $routeProvider.otherwise({redirectTo: '/events'});
+
+        // To get rid the # (hash sign in url), we use HTML5 routing
+        $locationProvider.html5Mode(true);
     });
