@@ -1,8 +1,11 @@
 'use strict';
 
-eventsApp.controller('EventController', function ($scope, eventData, $log) {
+// $route used to access the custom prroperties defined in the routeProvider
+eventsApp.controller('EventController', function ($scope, eventData, $log, $routeParams, $route) {
     $scope.sortorder = 'name';
-    $scope.query = '';
+    $scope.query = '';    
+    // This is print out the custom property
+    // console.log($route.current.foo);
     /* eventData.getEvent()
         .success(function (event) { $scope.event = event;})
         .error(function (data, status, headers, config) {
@@ -12,7 +15,7 @@ eventsApp.controller('EventController', function ($scope, eventData, $log) {
     /**
      * Use $resource in EventData     
      */    
-    eventData.getEvent()
+    eventData.getEvent($routeParams.eventId)
         .$promise
         .then (function (event) {$scope.event = event; console.log(event);})
         .catch(function (response) { console.log(response); });
@@ -27,5 +30,9 @@ eventsApp.controller('EventController', function ($scope, eventData, $log) {
         } else {
             i_oSession.upVoteCount--;
         }        
+    };
+
+    $scope.reload = function () {
+        $route.reload();
     }
 });

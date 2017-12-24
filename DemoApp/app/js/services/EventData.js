@@ -46,17 +46,20 @@ eventsApp.factory('eventData', function ($resource) {
             return $http({method : 'GET', url: '/data/event/1'})                
         }*/
         // Assume we use Rest-base architecture
-        getEvent : function () {
+        getEvent : function (eventId) {
             /**
              * URL
              * ID to be replaced
              * GET method
              */
-            return resource.get({id:1});
+            return resource.get({id:eventId});
         },
         save : function (event) {
             event.id = 999;
             return resource.save(event);
+        },
+        getAllEvents: function() {
+            return resource.query();
         }
     };
 });
