@@ -15,10 +15,12 @@ eventsApp.controller('EventController', function ($scope, eventData, $log, $rout
     /**
      * Use $resource in EventData     
      */    
-    eventData.getEvent($routeParams.eventId)
+    /*eventData.getEvent($routeParams.eventId)
         .$promise
         .then (function (event) {$scope.event = event; console.log(event);})
-        .catch(function (response) { console.log(response); });
+        .catch(function (response) { console.log(response); });*/
+    
+    $scope.event = $route.current.locals.event;
 
     $scope.upVoteSession = function (i_oSession) {
         i_oSession.upVoteCount++;

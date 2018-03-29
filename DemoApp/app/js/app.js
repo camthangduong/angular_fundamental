@@ -14,7 +14,12 @@ var eventsApp = angular.module('eventsApp', ['ngResource', 'ngRoute'])
         $routeProvider.when('/event/:eventId', {
             foo : 'bar', // this is the custom property wil be accessed by using $route service
             templateUrl: 'templates/EventDetails.html',
-            controller : 'EventController'
+            controller : 'EventController',
+            resolve : {
+                event : function ($route, eventData) {
+                    return eventData.getEvent($route.current.pathParams.eventId).$promise;
+                }
+            }
         });
         // Set default page
         $routeProvider.otherwise({redirectTo: '/events'});
